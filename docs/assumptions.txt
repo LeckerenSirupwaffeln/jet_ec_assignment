@@ -1,0 +1,10 @@
+* It's unclear how the result should be presented if at all, I assume a screenshot in the repo with an img link in the README.md is good enough
+* It's unclear whether the solution should be a single source code file with as little lines of code as possible, or worked out to be fully compatible with modern SWE practices
+  I'll assume some basic SWE practices are sufficient:
+  * Testing & coverage reports
+  * GitHub Actions CI
+  * Docker, and proper env config
+  * Pythonic documentation
+  * Modular & modern programming style (async, exceptions, structured logging)
+  * Static analysis, linting, formatting, pre-commit hooks, and modern dependency managemnet(via uv)
+

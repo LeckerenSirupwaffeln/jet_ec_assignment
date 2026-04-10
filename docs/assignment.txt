@@ -1,0 +1,9 @@
+* Use this API https://uk.api.just-eat.io/discovery/uk/restaurants/enriched/bypostcode/{postcode}
+* Use any valid UK postcode
+* Show data from the first 10 retrieved results, likely the first 10 in the json response
+* Only show name, cuisines, rating as a number, and an address
+* Visual interface of showing data does not matter
+* README.md should include instructions on how to build, compile, and run the solution
+* README.md should include assumptions or uncertainties
+* README.md should include possible improvements
+
