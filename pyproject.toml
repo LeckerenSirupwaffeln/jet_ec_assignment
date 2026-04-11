@@ -10,8 +10,14 @@ testpaths = ["apps/", "libs/"]
 
 [tool.mypy]
 strict = true
-explicit_package_bases = true
+explicit_package_bases = false
 files = ["apps/", "libs/"]
+plugins = ["pydantic.mypy"]
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
 
 [dependency-groups]
 build-docs = [
