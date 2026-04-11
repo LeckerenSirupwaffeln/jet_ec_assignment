@@ -1,0 +1,6 @@
+.git/
+.venv/
+.cache/
+.mypy_cache/
+.ruff_cache/
+.tox/

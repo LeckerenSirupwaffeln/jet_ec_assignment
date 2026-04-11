@@ -1,0 +1,20 @@
+[project]
+name = "example_app"
+dynamic = ["version"]
+description = "JET EC coding assignment example app"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "jet_api",
+]
+
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "vcs"  # Tells hatchling to look at Git/VCS
+raw-options = { root = "../..", version_scheme = "post-release" }
+
+[tool.uv.sources]
+jet_api = { workspace = true }

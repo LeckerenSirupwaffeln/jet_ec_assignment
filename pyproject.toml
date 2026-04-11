@@ -1,7 +1,82 @@
-[project]
-name = "jet-ec-assignment"
-version = "0.1.0"
-description = "Add your description here"
-readme = "README.md"
-requires-python = ">=3.12"
-dependencies = []
+[tool.uv]
+managed = true
+package = false
+
+[tool.uv.workspace]
+members = ["apps/*", "libs/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["apps/", "libs/"]
+
+[tool.mypy]
+strict = true
+explicit_package_bases = true
+files = ["apps/", "libs/"]
+
+[dependency-groups]
+build-docs = [
+    "mkdocs-material>=9.7.6",
+    "mkdocstrings[python]>=1.0.3",
+    "zensical>=0.0.32",
+]
+dev = [
+    "rust-just>=1.49.0",
+    "tox>=4.52.1",
+    "tox-uv>=1.35.1",
+]
+lint = [
+    "ruff>=0.15.10",
+]
+test = [
+    "deepdiff>=9.0.0",
+    "pytest>=9.0.3",
+    "pytest-asyncio>=1.3.0",
+    "pytest-sugar>=1.1.1",
+]
+typecheck = [
+    "mypy>=1.20.0",
+]
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = []
+
+# Same as Black.
+line-length = 88
+indent-width = 4
+
+target-version = "py312"
+
+[tool.ruff.lint]
+# E: pycodestyle
+# F: pyflakes
+# I: isort
+# B: flake8-bugbear
+# UP: pyupgrade
+# N: pep8-naming
+# RUF: ruff-specific rules
+# SIM: flake8-simplify
+# S: flake8-bandit
+# ARG: flake8-unused-arguments
+# PTH: flake8-use-pathlib
+select = ["E", "F", "I", "B", "UP", "N", "RUF", "SIM", "S", "ARG", "PTH"]
+
+ignore = [
+    "E501", # Ignore line too long, handled by formatter
+    "S101", # Allow use of assert for tests
+]
+
+fixable = ["ALL"]
+unfixable = []
+
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.lint.isort]
+known-first-party = ["example_app", "jet_api"]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
