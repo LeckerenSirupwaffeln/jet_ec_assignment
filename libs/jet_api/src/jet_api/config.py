@@ -13,9 +13,9 @@ class Settings(BaseSettings):
     VALID_UK_POSTCODE: str
     EXAMPLE_JET_RESTUARANTS_DATA_PATH: str
 
-    model_config = SettingsConfigDict(env_file="libs/jet_api/.env", env_file_required=True)
+    model_config = SettingsConfigDict(env_file="libs/jet_api/.env")
 
-    @computed_field
+    @computed_field  # type: ignore[prop-decorator]
     @property
     def jet_uk_api_uri_template(self) -> URITemplate:
         return URITemplate(self.JET_UK_API_URI_TEMPLATE)

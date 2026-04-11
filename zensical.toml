@@ -1,5 +1,6 @@
 [project]
 site_name = "JET EC Assignment Documentation"
+site_dir = "docs/site"
 docs_dir = "docs/zensical"
 use_directory_urls = false
 
