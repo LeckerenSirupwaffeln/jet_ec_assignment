@@ -8,6 +8,12 @@ on:
   pull_request:
     paths:
       - 'libs/jet_api/src/jet_api/resources/openapi.yaml'
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
 
 env:
   LIB_DIR: 'libs/jet_api'
