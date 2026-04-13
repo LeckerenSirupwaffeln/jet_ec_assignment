@@ -60,7 +60,7 @@ components:
       required: [city, firstLine, postalCode, location]
       properties:
         city: { type: string }
-        firstLine: { type: number }
+        firstLine: { type: string }
         postalCode: { type: string }
         location:
           $ref: '#/components/schemas/Location'
