@@ -34,6 +34,7 @@ jobs:
 
       - name: Generate Models
         run: |
+          uv venv
           uv pip install -e ${{ env.LIB_DIR }}
           uv run python '${{ env.LIB_DIR }}/${{ env.BUILD_MODELS_SCRIPT_REL }}'
 
