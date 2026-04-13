@@ -1,4 +1,3 @@
-1) Finish the GitHub actions spec validator
 2) Finish the basic jet_api client
-2) Set-up GA testing, linting, typechecking, formatting, docker deployment & release. Also automatic stats like test coverage.
+3) Set-up GA testing, linting, typechecking, formatting, docker deployment & release. Also automatic stats like test coverage.
 4) Finish example_app, and include performance tests
