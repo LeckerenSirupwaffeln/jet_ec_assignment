@@ -18,7 +18,7 @@ paths:
           description: UK postcode (without spaces or with optional space)
           schema:
             type: string
-            pattern: '^(GIR|[A-Z][0-9]{1,2}|[A-Z][A-HJ-Y][0-9]{1,2}|[A-Z][0-9][A-Z]|[A-Z][A-HJ-Y][0-9][A-Z])\s?[0-9][A-Z]{2}$'
+            pattern: '^(GIR|[A-Z][0-9]{1,2}|[A-Z][A-HJ-Y][0-9]{1,2}|[A-Z][0-9][A-Z]|[A-Z][A-HJ-Y][0-9][A-Z])\s?[0-9][A-Z]{1}$'
             example: "EC4M7RF"
       responses:
         '200':
