@@ -91,7 +91,7 @@ class Location(RootModel[Geometry]):
 
 class Address(BaseModel):
     city: str
-    firstLine: str
+    firstLine: float
     postalCode: str
     location: Location
 
