@@ -1,0 +1,43 @@
+name: Generate models on spec changes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'libs/jet_api/src/jet_api/resources/openapi.yaml'
+  pull_request:
+    paths:
+      - 'libs/jet_api/src/jet_api/resources/openapi.yaml'
+
+env:
+  LIB_DIR: 'libs/jet_api'
+  GENERATED_FILE_REL: 'src/jet_api/generated/models.py'
+  BUILD_MODELS_SCRIPT_REL: 'scripts/build_models.py'
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Generate Models
+        run: |
+          uv pip install -e ${{ env.LIB_DIR }}
+          uv run python '${{ env.LIB_DIR }}/${{ env.BUILD_MODELS_SCRIPT_REL }}'
+
+      - name: Commit and Push Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: auto-update models from spec"
+          file_pattern: '${{ env.LIB_DIR }}/${{ env.GENERATED_FILE_REL }}'
