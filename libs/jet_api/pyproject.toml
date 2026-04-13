@@ -7,9 +7,9 @@ requires-python = ">=3.12"
 dependencies = [
     "httpx>=0.28.1",
     "loguru>=0.7.3",
+    "openapi-core>=0.23.1",
     "pydantic>=2.12.5",
     "pydantic-settings>=2.13.1",
-    "uritemplate>=4.2.0",
 ]
 
 [build-system]
@@ -19,3 +19,8 @@ build-backend = "hatchling.build"
 [tool.hatch.version]
 source = "vcs"  # Tells hatchling to look at Git/VCS
 raw-options = { root = "../..", version_scheme = "post-release" }
+
+[dependency-groups]
+dev = [
+    "datamodel-code-generator>=0.56.0",
+]

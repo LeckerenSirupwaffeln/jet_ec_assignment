@@ -1,0 +1,84 @@
+openapi: 3.1.1
+info:
+  title: Just Eat API
+  version: 1.0.0
+  description: API for retrieving restaurants data by postcode
+servers:
+  - url: https://uk.api.just-eat.io
+    description: JET UK API production Server
+paths:
+  /discovery/uk/restaurants/enriched/bypostcode/{postcode}:
+    get:
+      summary: Get restaurants by postcode
+      operationId: getRestaurantsByPostcode
+      parameters:
+        - name: postcode
+          in: path
+          required: true
+          description: UK postcode (without spaces or with optional space)
+          schema:
+            type: string
+            pattern: '^(GIR|[A-Z][0-9]{1,2}|[A-Z][A-HJ-Y][0-9]{1,2}|[A-Z][0-9][A-Z]|[A-Z][A-HJ-Y][0-9][A-Z])\s?[0-9][A-Z]{2}$'
+            example: "EC4M7RF"
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestaurantsDataResponse'
+
+components:
+  schemas:
+    RestaurantsDataResponse:
+      type: object
+      required: [restaurants]
+      properties:
+        restaurants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Restaurant'
+
+    Restaurant:
+      type: object
+      required: [id, name, uniqueName, address, rating, cuisines]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        uniqueName: { type: string }
+        address:
+          $ref: '#/components/schemas/Address'
+        rating:
+          $ref: '#/components/schemas/Rating'
+        cuisines:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cuisine'
+
+    Address:
+      type: object
+      required: [city, firstLine, postalCode, location]
+      properties:
+        city: { type: string }
+        firstLine: { type: string }
+        postalCode: { type: string }
+        location:
+          $ref: '#/components/schemas/Location'
+
+    Location:
+      $ref: 'https://geojson.org/schema/Geometry.json'
+
+    Rating:
+      type: object
+      required: [count, starRating, userRating]
+      properties:
+        count: { type: integer }
+        starRating: { type: [number, "null"] }
+        userRating: { type: [number, "null"] }
+
+    Cuisine:
+      type: object
+      required: [name, uniqueName]
+      properties:
+        name: { type: string }
+        uniqueName: { type: string }
