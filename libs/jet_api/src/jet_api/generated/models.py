@@ -7,7 +7,7 @@ from pydantic import BaseModel, Field, RootModel
 
 
 class Type(StrEnum):
-    Point = 'Point'
+    Point = "Point"
 
 
 class GeoJSONPoint(BaseModel):
@@ -17,7 +17,7 @@ class GeoJSONPoint(BaseModel):
 
 
 class Type1(StrEnum):
-    LineString = 'LineString'
+    LineString = "LineString"
 
 
 class Coordinate(RootModel[list[float]]):
@@ -31,7 +31,7 @@ class GeoJSONLineString(BaseModel):
 
 
 class Type2(StrEnum):
-    Polygon = 'Polygon'
+    Polygon = "Polygon"
 
 
 class Coordinate1Item(RootModel[list[float]]):
@@ -49,7 +49,7 @@ class GeoJSONPolygon(BaseModel):
 
 
 class Type3(StrEnum):
-    MultiPoint = 'MultiPoint'
+    MultiPoint = "MultiPoint"
 
 
 class Coordinate2(RootModel[list[float]]):
@@ -63,7 +63,7 @@ class GeoJSONMultiPoint(BaseModel):
 
 
 class Type4(StrEnum):
-    MultiLineString = 'MultiLineString'
+    MultiLineString = "MultiLineString"
 
 
 class Coordinate3Item(RootModel[list[float]]):
@@ -81,7 +81,7 @@ class GeoJSONMultiLineString(BaseModel):
 
 
 class Type5(StrEnum):
-    MultiPolygon = 'MultiPolygon'
+    MultiPolygon = "MultiPolygon"
 
 
 class Coordinate4Item(RootModel[list[float]]):
@@ -98,8 +98,24 @@ class GeoJSONMultiPolygon(BaseModel):
     bbox: list[float] | None = Field(None, min_length=4)
 
 
-class Geometry(RootModel[GeoJSONPoint | GeoJSONLineString | GeoJSONPolygon | GeoJSONMultiPoint | GeoJSONMultiLineString | GeoJSONMultiPolygon]):
-    root: GeoJSONPoint | GeoJSONLineString | GeoJSONPolygon | GeoJSONMultiPoint | GeoJSONMultiLineString | GeoJSONMultiPolygon = Field(..., title='GeoJSON Geometry')
+class Geometry(
+    RootModel[
+        GeoJSONPoint
+        | GeoJSONLineString
+        | GeoJSONPolygon
+        | GeoJSONMultiPoint
+        | GeoJSONMultiLineString
+        | GeoJSONMultiPolygon
+    ]
+):
+    root: (
+        GeoJSONPoint
+        | GeoJSONLineString
+        | GeoJSONPolygon
+        | GeoJSONMultiPoint
+        | GeoJSONMultiLineString
+        | GeoJSONMultiPolygon
+    ) = Field(..., title="GeoJSON Geometry")
 
 
 class Rating(BaseModel):

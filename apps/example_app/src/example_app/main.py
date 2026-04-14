@@ -3,9 +3,9 @@ import sys
 
 import questionary
 from loguru import logger
+from openapi_core.validation.request.exceptions import InvalidParameter
 from rich.console import Console
 from rich.table import Table
-from openapi_core.validation.request.exceptions import InvalidParameter
 
 from jet_api import Client
 from jet_api.models import Restaurant
