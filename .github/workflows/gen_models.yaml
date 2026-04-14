@@ -33,11 +33,12 @@ jobs:
           enable-cache: true
 
       - name: Install dependencies
-        run: uv sync --all-extras --dev
+        run: |
+          uv venv
+          uv sync --all-extras --dev
 
       - name: Generate Models
         run: |
-          uv venv
           uv pip install -e ${{ env.LIB_DIR }}
           uv run python '${{ env.LIB_DIR }}/${{ env.BUILD_MODELS_SCRIPT_REL }}'
 
