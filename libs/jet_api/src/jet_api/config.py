@@ -16,7 +16,7 @@ class Settings(BaseSettings):
         validate_default=True,
     )
 
-    OPENAPI_SPEC_TRAVERSABLE: TraversableResource = "openapi.yaml"
+    OPENAPI_SPEC_TRAVERSABLE: TraversableResource = "openapi.yaml"  # type: ignore[assignment]
 
 
 @lru_cache
