@@ -19,7 +19,7 @@ paths:
           schema:
             type: string
             pattern: '^(GIR|[A-Z][0-9]{1,2}|[A-Z][A-HJ-Y][0-9]{1,2}|[A-Z][0-9][A-Z]|[A-Z][A-HJ-Y][0-9][A-Z])\s?[0-9][A-Z]{2}$'
-            example: "EC4M7RF"
+            example: 'EC4M7RF'
       responses:
         '200':
           description: Successful request
