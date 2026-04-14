@@ -14,8 +14,7 @@ WORKDIR /app
 # Install dependencies first to leverage Docker layer caching
 RUN \
   --mount=type=cache,target=/root/.cache/uv \
-  --mount=type=bind,source=uv.lock,target=uv.lock \
-  --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+  --mount=type=bind,source=.,target=. \
   uv sync --frozen --no-install-project --no-dev
 
 # Copy whole directory and run uv sync
@@ -37,7 +36,8 @@ WORKDIR /app
 COPY --from=builder --chown=appuser:appuser /app/.venv /app/.venv
 
 # Copy application code with correct ownership
-COPY --chown=appuser:appuser . .
+COPY --chown=appuser:appuser apps/example_app ./apps/example_app
+COPY --chown=appuser:appuser pyproject.toml .
 
 # Environment configuration
 ENV PATH="/app/.venv/bin:$PATH" \
