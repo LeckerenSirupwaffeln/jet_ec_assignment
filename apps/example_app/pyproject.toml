@@ -18,11 +18,3 @@ raw-options = { root = "../..", version_scheme = "post-release" }
 
 [tool.uv.sources]
 jet_api = { workspace = true }
-
-[tool.hatch.build.targets.wheel]
-packages = ["example_app"]
-
-[tool.hatch.build.targets.sdist]
-include = [
-    "py.typed",
-]

@@ -26,6 +26,7 @@ warn_untyped_fields = true
 [dependency-groups]
 build-docs = [
     "mkdocs-material>=9.7.6",
+    "mkdocstrings-python>=2.0.3",
     "mkdocstrings[python]>=1.0.3",
     "zensical>=0.0.32",
 ]

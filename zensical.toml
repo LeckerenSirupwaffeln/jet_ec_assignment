@@ -17,5 +17,15 @@ features = [
 "Apps/Example App" = "apps/example_app.md"
 "Libraries/Jet API" = "libs/jet_api.md"
 
-[markdown.extensions.mkdocstrings]
-handlers.python.options = { heading_level = 2, import_symbols = true, show_source = true, show_root_heading = true, members_order = "alphabetical" }
+[project.plugins.mkdocstrings.handlers.python]
+paths = ["."] 
+
+[project.plugins.mkdocstrings.handlers.python.options]
+heading_level = 2
+import_symbols = true
+show_source = true
+show_root_heading = true
+members_order = "alphabetical"
+docstring_style = "google"
+import_from_init = true
+follow_wrapped_objects = true

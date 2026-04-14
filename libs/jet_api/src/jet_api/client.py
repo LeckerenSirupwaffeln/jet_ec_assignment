@@ -15,6 +15,8 @@ from .pydantic_streamer import PydanticStreamer
 
 
 class Client:
+    """An API client dynamically configured via an OpenAPI specification."""
+
     def __init__(self) -> None:
         logger.info("Initializing client...")
         spec_traversable = get_settings().OPENAPI_SPEC_TRAVERSABLE
