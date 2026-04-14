@@ -5,13 +5,53 @@ from typing import Any
 
 import httpx
 from loguru import logger
-from openapi_core import OpenAPI
+from openapi_core import OpenAPI, validate_request
+from openapi_core.datatypes import RequestParameters
+from openapi_core.protocols import Request
 
 from .config import get_settings
 from .generated.models import (
     RestaurantsDataResponse,
 )
 from .pydantic_streamer import PydanticStreamer
+
+
+class HttpxOpenAPIAdapter(Request):
+    """Adapts an httpx.Request to perfectly match the openapi_core Request protocol."""
+
+    def __init__(self, request: httpx.Request) -> None:
+        self._request = request
+
+        self.parameters = RequestParameters(
+            query=dict(request.url.params),
+            header=dict(request.headers),
+            cookie={},
+            path={},
+        )
+
+    @property
+    def host_url(self) -> str:
+        port_str = f":{self._request.url.port}" if self._request.url.port else ""
+        return f"{self._request.url.scheme}://{self._request.url.host}{port_str}"
+
+    @property
+    def path(self) -> str:
+        return self._request.url.path
+
+    @property
+    def method(self) -> str:
+        return self._request.method.lower()
+
+    @property
+    def body(self) -> bytes | None:
+        return self._request.content if hasattr(self._request, "content") else b""
+
+    @property
+    def content_type(self) -> str:
+        content_type_header = str(
+            self._request.headers.get("content-type", "application/json")
+        )
+        return content_type_header.split(";")[0]
 
 
 class Client:
@@ -63,10 +103,10 @@ class Client:
         if not self._ops:
             raise ValueError("Found no valid ops in loaded OpenAPI spec")
 
-        self.op_get_restaurants_by_postcode = self._ops.get(
+        self._op_get_restaurants_by_postcode = self._ops.get(
             "getRestaurantsByPostcode", None
         )
-        if not self.op_get_restaurants_by_postcode:
+        if not self._op_get_restaurants_by_postcode:
             raise ValueError(
                 'Found no valid op where "operationId" is "getRestaurantsByPostcode"'
             )
@@ -105,11 +145,18 @@ class Client:
             ```
         """
 
-        if self.op_get_restaurants_by_postcode is None:
+        if self._openapi is None:
+            raise ValueError("OpenAPI spec not initialized")
+
+        if self._op_get_restaurants_by_postcode is None:
             raise ValueError("Operation not initialized")
 
-        path_template, method = self.op_get_restaurants_by_postcode
+        path_template, method = self._op_get_restaurants_by_postcode
         full_url = f"{self._base_url}{path_template.format(postcode=postcode)}"
+
+        logger.debug("Validating request according to OpenAPI specs")
+        request = httpx.Request(method, full_url)
+        validate_request(HttpxOpenAPIAdapter(request), spec=self._openapi.spec)
 
         logger.debug(f"Returning streaming request to {full_url}")
 

@@ -294,6 +294,7 @@ name = "example-app"
 source = { editable = "apps/example_app" }
 dependencies = [
     { name = "jet-api" },
+    { name = "openapi-core" },
     { name = "questionary" },
     { name = "rich" },
 ]
@@ -301,6 +302,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "jet-api", editable = "libs/jet_api" },
+    { name = "openapi-core", specifier = ">=0.23.1" },
     { name = "questionary", specifier = ">=2.1.1" },
     { name = "rich", specifier = ">=15.0.0" },
 ]
