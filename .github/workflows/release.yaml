@@ -95,6 +95,22 @@ jobs:
             type=ref,event=tag
             type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
 
+      - name: Generate Version String
+        id: versioning
+        run: |
+          if [ "${{ github.ref_type }}" == "tag" ]; then
+            # If it's a tag, just use the tag
+            echo "version=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+          else
+            # Get the previous tag (or default to 0.0.0 if none exist)
+            LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "0.0.0")
+            # Get the short 7-character commit hash
+            SHORT_SHA=$(git rev-parse --short HEAD)
+            
+            # Combine them into a PEP 440 compliant string indicating this is latest
+            echo "version=${LATEST_TAG}+latest.${SHORT_SHA}" >> $GITHUB_OUTPUT
+          fi
+
       - name: Build and Push
         uses: docker/build-push-action@v5
         with:
@@ -104,4 +120,4 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            APP_VERSION=${{ github.ref_type == 'tag' && github.ref_name }}
+            APP_VERSION=${{ steps.versioning.outputs.version }}
