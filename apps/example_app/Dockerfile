@@ -55,4 +55,4 @@ ENV PATH="/app/.venv/bin:$PATH" \
 USER appuser
 
 # Set the command to run your app
-CMD ["python", "-m", "example_app.main"]
+ENTRYPOINT ["example_app"]

@@ -47,7 +47,7 @@ async def fetch_restaurants(client: Client, postcode: str) -> None:
     CONSOLE.print(table)
 
 
-async def main() -> None:
+async def async_main() -> None:
     client = Client()
 
     logger.debug("Starting app...")
@@ -64,9 +64,13 @@ async def main() -> None:
             continue
 
 
-if __name__ == "__main__":
+def main() -> None:
     try:
-        asyncio.run(main())
+        asyncio.run(async_main())
     except KeyboardInterrupt:
         CONSOLE.print("\n[bold red]Aborted by user.[/]")
         sys.exit(0)
+
+
+if __name__ == "__main__":
+    main()
