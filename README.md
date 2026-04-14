@@ -87,3 +87,8 @@ The project uses `just` to automate common development tasks:
 The application example_app runs as a standard console interface:
 
 ![Working example_app example](docs/working_example_app.png)
+
+## Apps & libs
+
+* **example_app:** (App) An example app that fulfills conditions of the assignment. Turn it on, enter valid UK postcodes and receive data back
+* **jet_api:** (Lib) Async API made specifically to interface with JET UK API
