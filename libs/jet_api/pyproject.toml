@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "httpx>=0.28.1",
+    "ijson>=3.5.0",
     "loguru>=0.7.3",
     "openapi-core>=0.23.1",
     "pydantic>=2.12.5",

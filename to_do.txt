@@ -1,3 +1,2 @@
-2) Finish the basic jet_api client
 3) Set-up GA testing, linting, typechecking, formatting, docker deployment & release. Also automatic stats like test coverage.
 4) Finish example_app, and include performance tests
