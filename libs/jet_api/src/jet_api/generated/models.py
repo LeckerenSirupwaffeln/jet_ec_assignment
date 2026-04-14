@@ -10,7 +10,7 @@ class Type(StrEnum):
     Point = 'Point'
 
 
-class Geometry1(BaseModel):
+class GeoJSONPoint(BaseModel):
     type: Type
     coordinates: list[float] = Field(..., min_length=2)
     bbox: list[float] | None = Field(None, min_length=4)
@@ -21,10 +21,10 @@ class Type1(StrEnum):
 
 
 class Coordinate(RootModel[list[float]]):
-    root: list[float]
+    root: list[float] = Field(..., min_length=2)
 
 
-class Geometry2(BaseModel):
+class GeoJSONLineString(BaseModel):
     type: Type1
     coordinates: list[Coordinate] = Field(..., min_length=2)
     bbox: list[float] | None = Field(None, min_length=4)
@@ -34,9 +34,17 @@ class Type2(StrEnum):
     Polygon = 'Polygon'
 
 
-class Geometry3(BaseModel):
+class Coordinate1Item(RootModel[list[float]]):
+    root: list[float] = Field(..., min_length=2)
+
+
+class Coordinate1(RootModel[list[Coordinate1Item]]):
+    root: list[Coordinate1Item] = Field(..., min_length=4)
+
+
+class GeoJSONPolygon(BaseModel):
     type: Type2
-    coordinates: list[list[Coordinate]]
+    coordinates: list[Coordinate1]
     bbox: list[float] | None = Field(None, min_length=4)
 
 
@@ -44,9 +52,13 @@ class Type3(StrEnum):
     MultiPoint = 'MultiPoint'
 
 
-class Geometry4(BaseModel):
+class Coordinate2(RootModel[list[float]]):
+    root: list[float] = Field(..., min_length=2)
+
+
+class GeoJSONMultiPoint(BaseModel):
     type: Type3
-    coordinates: list[list[float]]
+    coordinates: list[Coordinate2]
     bbox: list[float] | None = Field(None, min_length=4)
 
 
@@ -54,9 +66,17 @@ class Type4(StrEnum):
     MultiLineString = 'MultiLineString'
 
 
-class Geometry5(BaseModel):
+class Coordinate3Item(RootModel[list[float]]):
+    root: list[float] = Field(..., min_length=2)
+
+
+class Coordinate3(RootModel[list[Coordinate3Item]]):
+    root: list[Coordinate3Item] = Field(..., min_length=2)
+
+
+class GeoJSONMultiLineString(BaseModel):
     type: Type4
-    coordinates: list[list[Coordinate]]
+    coordinates: list[Coordinate3]
     bbox: list[float] | None = Field(None, min_length=4)
 
 
@@ -64,14 +84,22 @@ class Type5(StrEnum):
     MultiPolygon = 'MultiPolygon'
 
 
-class Geometry6(BaseModel):
+class Coordinate4Item(RootModel[list[float]]):
+    root: list[float] = Field(..., min_length=2)
+
+
+class Coordinate4(RootModel[list[Coordinate4Item]]):
+    root: list[Coordinate4Item] = Field(..., min_length=4)
+
+
+class GeoJSONMultiPolygon(BaseModel):
     type: Type5
-    coordinates: list[list[list[Coordinate]]]
+    coordinates: list[list[Coordinate4]]
     bbox: list[float] | None = Field(None, min_length=4)
 
 
-class Geometry(RootModel[Geometry1 | Geometry2 | Geometry3 | Geometry4 | Geometry5 | Geometry6]):
-    root: Geometry1 | Geometry2 | Geometry3 | Geometry4 | Geometry5 | Geometry6 = Field(..., title='GeoJSON Geometry')
+class Geometry(RootModel[GeoJSONPoint | GeoJSONLineString | GeoJSONPolygon | GeoJSONMultiPoint | GeoJSONMultiLineString | GeoJSONMultiPolygon]):
+    root: GeoJSONPoint | GeoJSONLineString | GeoJSONPolygon | GeoJSONMultiPoint | GeoJSONMultiLineString | GeoJSONMultiPolygon = Field(..., title='GeoJSON Geometry')
 
 
 class Rating(BaseModel):
