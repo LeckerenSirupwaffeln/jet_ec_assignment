@@ -1,13 +1,18 @@
 # BUILDING STAGE
 FROM python:3.12-slim-bookworm AS builder
 
+# Define an argument to catch the version from env
+ARG APP_VERSION=0.0.0
+
 # Install uv directly from the official image
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 # Enable bytecode compilation and copy mode for speed
 ENV \
   UV_COMPILE_BYTECODE=1 \
-  UV_LINK_MODE=copy
+  UV_LINK_MODE=copy \
+  SETUPTOOLS_SCM_PRETEND_VERSION=${APP_VERSION} \
+  HATCH_VERSION=${APP_VERSION}
 
 WORKDIR /app
 
