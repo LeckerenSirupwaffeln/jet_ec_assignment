@@ -17,6 +17,7 @@ RUN \
   --mount=type=bind,source=uv.lock,target=uv.lock \
   --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
   --mount=type=bind,source=apps,target=apps \
+  --mount=type=bind,source=libs,target=libs \
   uv sync --frozen --no-install-project --no-dev
 
 # Copy whole directory and run uv sync
