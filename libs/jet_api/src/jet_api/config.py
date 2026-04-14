@@ -11,9 +11,12 @@ from .config_validation import (
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file="libs/jet_api/.env")
+    model_config = SettingsConfigDict(
+        env_file="libs/jet_api/.env",
+        validate_default=True,
+    )
 
-    OPENAPI_SPEC_TRAVERSABLE: TraversableResource
+    OPENAPI_SPEC_TRAVERSABLE: TraversableResource = "openapi.yaml"
 
 
 @lru_cache
