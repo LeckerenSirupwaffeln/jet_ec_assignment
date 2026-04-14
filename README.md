@@ -94,7 +94,7 @@ The application example_app runs as a standard console interface:
 * **jet_api:** (Lib) Async API made specifically to interface with JET UK API
 
 ## Documentation
-Documentation is available at `docs/site/index.html`
-Here is a preview of a page:
+Documentation is available at `docs/site/index.html`  
+**Here is a preview of a page:**
 
 ![Documentation preview](docs/documentation_page_preview.png)
