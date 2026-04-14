@@ -1,7 +1,7 @@
 # jet_ec_assignment
-Early careers software engineering program complete at home coding assignment.
+Early careers software engineering program complete at home coding assignment
 
-A simple application that queries postcodes using the JET UK API and returns the 10 latest restaurants.
+A simple application that queries postcodes using the JET UK API and returns the 10 latest restaurants
 
 ## Getting Started
 
@@ -75,12 +75,12 @@ The project uses `just` to automate common development tasks:
 ## Assumptions & improvements
 
 ### Assumptions
-* It is assumed the user needs to input the postcode manually via the CLI.
+* It is assumed the user needs to input the postcode manually via the CLI
 
 ### Improvements
-* **Enhanced testing:** Add Unit, integration, E2E, and performance test suites (currently none).
-* **Extended documentation:** Increase docstring coverage.
-* **UI polish:** Add user rating counts next to the star ratings in the CLI output of example_app.
+* **Enhanced testing:** Add Unit, integration, E2E, and performance test suites (currently none)
+* **Extended documentation:** Increase docstring coverage
+* **UI polish:** Add user rating counts next to the star ratings in the CLI output of example_app
 
 ## Interface
 
