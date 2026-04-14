@@ -29,7 +29,7 @@ RUN \
 COPY . .
 RUN \
   --mount=type=cache,target=/root/.cache/uv \
-  uv sync --frozen --no-dev
+  uv sync --frozen --no-dev --no-editable
 
 
 # RUNTIME STAGE
