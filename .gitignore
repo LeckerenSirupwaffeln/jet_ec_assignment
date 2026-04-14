@@ -4,4 +4,5 @@
 .mypy_cache/
 .ruff_cache/
 .tox/
+dist/
 **/__pycache__/
