@@ -6,6 +6,8 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "jet_api",
+    "questionary>=2.1.1",
+    "rich>=15.0.0",
 ]
 
 [build-system]
