@@ -62,10 +62,10 @@ The project uses `just` to automate common development tasks:
             * Linting using ruff
             * Type-checking using mypy
             * Testing using pytest
-* **Release workflow**
-    * Releases on push to main or on git tags
-    * Only releases on succesful CI runs
-    * Releases packages to GitHub and also Docker images to GHCR
+    * **Release workflow**
+        * Releases on push to main or on git tags
+        * Only releases on succesful CI runs
+        * Releases packages to GitHub and also Docker images to GHCR
 * jet_api library seperated from example_app
 * Pydantic validation
 * Asynchronous httpx + ijson streaming
