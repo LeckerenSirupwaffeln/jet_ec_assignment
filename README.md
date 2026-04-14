@@ -92,3 +92,9 @@ The application example_app runs as a standard console interface:
 
 * **example_app:** (App) An example app that fulfills conditions of the assignment. Turn it on, enter valid UK postcodes and receive data back
 * **jet_api:** (Lib) Async API made specifically to interface with JET UK API
+
+## Documentation
+Documentation is available at `docs/site/index.html`
+Here is a preview of a page:
+
+![Documentation preview](docs/documentation_page_preview.png)
