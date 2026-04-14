@@ -14,7 +14,9 @@ WORKDIR /app
 # Install dependencies first to leverage Docker layer caching
 RUN \
   --mount=type=cache,target=/root/.cache/uv \
-  --mount=type=bind,source=.,target=. \
+  --mount=type=bind,source=uv.lock,target=uv.lock \
+  --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+  --mount=type=bind,source=apps,target=apps \
   uv sync --frozen --no-install-project --no-dev
 
 # Copy whole directory and run uv sync
