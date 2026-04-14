@@ -34,7 +34,7 @@ pip install <path_to_wheel_file>
 example_app
 ```
 
-### Developement
+### Development
 
 The project uses `just` to automate common development tasks:
 
