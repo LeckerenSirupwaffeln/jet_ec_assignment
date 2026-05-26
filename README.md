@@ -1,5 +1,5 @@
 # jet_ec_assignment
-Early careers software engineering program complete at home coding assignment
+Software engineering program complete at home coding assignment
 
 A simple application that queries postcodes using the JET UK API and returns the 10 latest restaurants
 
